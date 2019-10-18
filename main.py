@@ -1,11 +1,32 @@
 
 import numpy as np
+from perceptron import Perceptron
+from predict import Predict
+from svm import Svm
 from probclearn import Probclearn
 from nearestneighbor import Nearestneighbor
 from probcpredict import Probcpredict
 from kfoldcv import Kfoldcv
 from bootstrapping import Bootstrapping
 from hypotest import Hypotest
+
+#case 2_1
+np.set_printoptions(precision=4)
+X = np.array([[-3, 2],
+[-2, 1.5],
+[-1, 1],
+[0, 0.5],
+[1, 0]])
+y = np.array([[1], [1], [1], [-1], [-1]])
+pe=Perceptron(10,X,y)
+theta_perceptron, num = pe.perceptron()
+sv=Svm(X,y)
+theta_svm = sv.svm()
+pr=Predict(theta_perceptron,np.array([[1], [-2]]))
+print("From preceptron algorithm, the theta is:",theta_perceptron,"using direction [[1], [-2]], it will be predicted as:",pr.predict())
+pr2=Predict(theta_svm,np.array([[1], [-2]]))
+print("From svm, the theta is:",theta_svm,"using direction [[1], [-2]], it will be predicted as:",pr2.predict())
+
 
 #case 3_1
 np.set_printoptions(precision=4)
